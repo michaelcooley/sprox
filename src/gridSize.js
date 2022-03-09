@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 export function GridSize(props) {
         return (
-            <div class="width-height-field">
+            <div class="grid-size-container">
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Grid Size</InputLabel>
                     <Select

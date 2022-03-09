@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: ghostwhite;
 }
 
 code {
@@ -16,6 +17,7 @@ code {
   width: 70%;
   text-align: left;
   margin-left: 20px;
+  font-size: small;
 }
 
 .score {
@@ -40,23 +42,60 @@ code {
   height: 50px;
 }
 
-.scorecard {
-  width: 70%;
-  text-align: left;
+.options-row-container {
+  display: flex;
+  flex-direction: row;
+  width: 55%;
+  justify-content: space-between;
+  justify-items: center;
+  align-content: space-between;
+  align-items: flex-start;
+  margin-left: 5%;
+  margin-top: 3%;
+  margin-botton: 5%;
 }
 
-.new-game-button {
-  background-color: lightgrey;
-  color: black;
-  font-weight: bold;
-  width: 140px;
-  height: 40px;
-}
-
-.width-height-field {
-  background-color: lightgrey;
+.grid-size-container {
+  display: flex;
+  width: 20%;
   color: black;
   font-weight: normal;
-  width: 180px;
-  height: 50px;
+}
+
+.restart-game-container {
+  display: flex;
+  background-color: lightblue;
+  color: black;
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.score-container {
+  display: flex;
+  color: black;
+  font-weight: normal;
+  margin-top: 25px;
+}
+
+.gameboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-left: 3%;
+}
+
+.scorecard-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 40%;
+  margin-left: 25%;
+  margin-top: 3%;
+  font-size: small;
+}
+
+.ul-no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+  text-align: left;
 }

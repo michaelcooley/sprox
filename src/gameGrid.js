@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 export function GameGrid(props) {
             return (
-                <div>
+                <div class="gameboard-container">
                     <Gameboard body={props.body} onIconClicked={props.onIconClicked}/>
                 </div>
             );

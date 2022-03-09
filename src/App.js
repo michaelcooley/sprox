@@ -7,7 +7,7 @@ import { Score } from './score';
 import { GameGrid } from './gameGrid';
 import { populateGrid, flipCardToFront, checkForMatch, flipCardsBackOver, markCardsAsCleared, cardAlreadyCleared } from './gridUtils';
 import { Scorecard } from './scorecard';
-import { NewGameButton } from './newGameButton';
+import { RestartGameButton } from './restartGameButton';
 import { GridSize } from './gridSize';
 import { GridElement } from './gridElement';
 
@@ -61,11 +61,6 @@ class App extends React.Component {
         }
         
         let new_state = Object.assign({}, this.state);
-
-        //new_state.body = emptyBody;
-        //this.setState({body: emptyBody});
-        //populateGrid(emptyBody, this.state.gridSize);
-        //console.log('empty body populated');
         let newBody = new_state.body;
         populateGrid(newBody, this.state.gridSize);
   
@@ -146,13 +141,26 @@ class App extends React.Component {
         this.setState({score: this.state.score + 1});
     }
 
-    onNewGameClicked = () => {
+    onRestartGameClicked = () => {
 
         console.log('new game');
         let new_state = Object.assign({}, this.state);
-        let newBody = new_state.body;
-        populateGrid(newBody, this.state.gridSize);
-        this.setState({body: newBody});
+
+        var newSize = this.state.gridSize;
+        var emptyBody = new Array();
+        var keyIndex = 0;
+        for(var row = 0; row < newSize; row++)
+        {
+            emptyBody[row] = new Array();
+            for(var col = 0; col < newSize; col++)
+            {
+                emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
+            }
+        }
+
+        populateGrid(emptyBody, this.state.gridSize);
+        //new_state.body = emptyBody;
+        this.setState({body: emptyBody});
         this.setState({score: 0});
         this.setState({cardsFlipped: 0});
         this.setState({card1: ''});
@@ -196,12 +204,15 @@ class App extends React.Component {
             <div className="App">
                 <TitleBar version="0.1"/>
                 <Description/>
-                <GridSize size={this.state.gridSize} onSizeSelected={this.onSizeSelected} />
-                <NewGameButton gameOver={this.state.gameOver} onButtonClicked={this.onNewGameClicked} />
-                <Score score={this.state.score} />
+                <div class="options-row-container">
+                  <Score score={this.state.score} />
+                  <RestartGameButton onButtonClicked={this.onRestartGameClicked} />
+                  <GridSize size={this.state.gridSize} onSizeSelected={this.onSizeSelected} />
+                </div>
+
                 <Outcome class="outcome" lastResult={this.state.result} />
                 <GameGrid body={this.state.body} onIconClicked={this.onIconClicked}/>
-                <Scorecard display={true} />
+                <Scorecard display={true} size={this.state.gridSize}/>
             </div>
         );
     }

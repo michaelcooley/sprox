@@ -1,3 +1,3 @@
 export function TitleBar(props) {
-    return <h1 align="left">Sprox {props.version}</h1>;
+    return <h3 align="left">Sprox {props.version}</h3>;
 }
