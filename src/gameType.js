@@ -13,12 +13,12 @@ export function GameType(props) {
                     labelId="select-game-type-label"
                     id="select-game-type"
                     value={props.gameType}
-                    /*label="Game Type"*/
                     onChange={props.onGameTypeSelected}
                     className="menu-font-style"
                 >
-                    <MenuItem className="menu-font-style" value={'planets'}>Planets</MenuItem>
+                    <MenuItem className="menu-font-style" value={'bands'}>Bands</MenuItem>
                     <MenuItem className="menu-font-style" value={'books'}>Books</MenuItem>
+                    <MenuItem className="menu-font-style" value={'planets'}>Planets</MenuItem>
                 </Select>
             </FormControl>
         </div>

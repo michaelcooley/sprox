@@ -1,17 +1,31 @@
 //export const gridSize = 4;
 const CLEARED_MESSAGE = "**CLEARED**";
 
+export const bands =
+    [
+        {name: "The Doors", value: "Jim Morrison"},
+        {name: "Black Sabbath", value: "Tony Iommi"},
+        {name: "Pink Floyd", value: "David Gilmour"},
+        {name: "Led Zeppelin", value: "Jimmy Page"},
+        {name: "Nirvana", value: "Kurt Cobain"},
+        {name: "Rush", value: "Geddy Lee"},
+        {name: "The Rolling Stones", value: "Keith Richards"},
+        {name: "The Beatles", value: "John Lennon"},
+        {name: "Blondie", value: "Debbie Harry"},
+        {name: "The Who", value: "Keith Moon"}
+    ];
+
 export const planets =
     [
-        {name: "Mercury", value: "36.8"},
-        {name: "Venus", value: "67.2"},
-        {name: "Earth", value: "93"},
-        {name: "Mars", value: "141.6"},
-        {name: "Jupiter", value: "483.6"},
-        {name: "Saturn", value: "886.5"},
-        {name: "Uranus", value: "1,783.7"},
-        {name: "Neptune", value: "2,795.2"},
-        {name: "Pluto", value: "3,670.1"},
+        {name: "Mercury", value: "36.8 Million Miles"},
+        {name: "Venus", value: "67.2  Million Miles"},
+        {name: "Earth", value: "93  Million Miles"},
+        {name: "Mars", value: "141.6  Million Miles"},
+        {name: "Jupiter", value: "483.6  Million Miles"},
+        {name: "Saturn", value: "886.5  Million Miles"},
+        {name: "Uranus", value: "1,783.7  Million Miles"},
+        {name: "Neptune", value: "2,795.2  Million Miles"},
+        {name: "Pluto", value: "3,670.1  Million Miles"},
     ];
 
 export const books =
@@ -35,7 +49,9 @@ export function populateGrid(body, gridSize, gameType) {
         var randomItem;
         console.log('populating grid of type: ' + gameType);
         
-        if (gameType == 'planets') {
+        if (gameType == 'bands') {
+            randomItem = bands[Math.floor(Math.random() * bands.length)];
+        } else if (gameType == 'planets') {
             randomItem = planets[Math.floor(Math.random() * planets.length)];
         } else if (gameType == 'books') {
             randomItem = books[Math.floor(Math.random() * books.length)];
@@ -100,7 +116,14 @@ export function markCardsAsCleared(body, card1, val, gridSize) {
 
 export function checkForMatch(card1, val, gameType) {
 
-    if (gameType == 'planets') {
+    if (gameType == 'bands') {
+        for (var j = 0; j < bands.length; j++) {
+            if ((bands[j].name == card1.display || bands[j].name == val.display)&&
+                (bands[j].value == card1.display || bands[j].value == val.display)) {
+                return true;
+            }
+        }
+    } else if (gameType == 'planets') {
         for (var j = 0; j < planets.length; j++) {
             if ((planets[j].name == card1.display || planets[j].name == val.display)&&
                 (planets[j].value == card1.display || planets[j].value == val.display)) {

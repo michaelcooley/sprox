@@ -19,9 +19,11 @@
  * Fix code warnings
  * convert components that are functions into actual components
  * Add matched and not matched sounds
- * make the 'click on a card' prompts more like a banner with inverse text
+ * **DONE** make the 'click on a card' prompts more like a banner 
  * add a game over noise
  * make the cards look better with a picture on back instead of ????
  * fix glitch that makes cards with a lot of text on them jump when you click on them (material ui problem?)
+ * **DONE** add Band theme
+
  
  

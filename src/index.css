@@ -28,10 +28,23 @@ code {
   margin-left: 20px;
 }
 
-.outcome {
-  width: 40%;
-  text-align: right;
-  margin-right: 40px;
+.outcome-container {
+  display: flex;
+  width: 30%;
+  height: 25px;
+  justify-content: center;
+  justify-items: center;
+  color:crimson;
+  font-weight: bold;
+}
+
+.instructions-container {
+  display: flex;
+  width: 30%;
+  height: 25px;
+  justify-content: center;
+  justify-items: center;
+  color: black;
 }
 
 .grid-buttons {
@@ -45,17 +58,17 @@ code {
 }
 
 .options-row-container {
-  display: flex;
-  flex-direction: row;
-  width: 70%;
-  justify-content: space-between;
-  justify-items: center;
-  align-content: space-between;
-  align-items: flex-start;
-  margin-left: 5%;
-  margin-top: 3%;
-  margin-bottom: 5%;
-}
+   display: flex;
+   flex-direction: row;
+   width: 70%;
+   justify-content: space-between;
+   justify-items: center;
+   align-content: space-between;
+   align-items: flex-start;
+   margin-left: 5%;
+   margin-top: 3%;
+   margin-bottom: 5%;
+ }
 
 .grid-size-container {
   display: flex;
@@ -76,6 +89,7 @@ code {
   display: flex;
   color: black;
   font-weight: normal;
+  font-size: small;
   margin-top: 25px;
 }
 
@@ -109,6 +123,7 @@ code {
   width: 40%;
   margin-left: 25%;
   margin-top: 3%;
+  margin-bottom: 5%;
   font-size: small;
 }
 
@@ -130,4 +145,15 @@ code {
 .menu-font-style {
   transform: scale(.8); /* scale down */
   -webkit-transform-origin-x: 0; /* align text left after scaling */
+}
+
+.instructions-results-row-container {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  justify-content: space-between;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  margin-left: 6%;
 }
