@@ -201,6 +201,7 @@ class App extends React.Component {
         this.setState({instruction: 'Click On A Card'});
         this.setState({cardsCleared: 0});
         this.setState({gameOver: false});
+        this.setState({result: ''});
     }
 
     // Create a callback to toggle the `mobileOpen` state

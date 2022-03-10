@@ -24,6 +24,7 @@
  * make the cards look better with a picture on back instead of ????
  * fix glitch that makes cards with a lot of text on them jump when you click on them (material ui problem?)
  * **DONE** add Band theme
+ * refactor code that reinits state on new game and change grid size to use same function
 
  
  
