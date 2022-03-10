@@ -35,24 +35,26 @@ code {
 }
 
 .grid-buttons {
-  background-color: powderblue;
-  color: darkblue;
-  font-weight: bold;
-  width: 100px;
-  height: 50px;
+  background-color:lightgray;
+  color: black;
+  font-weight: normal;
+  font-size: 14px;
+  width: 120px;
+  height: 80px;
+  margin: 3px 3px 3px 3px;
 }
 
 .options-row-container {
   display: flex;
   flex-direction: row;
-  width: 55%;
+  width: 70%;
   justify-content: space-between;
   justify-items: center;
   align-content: space-between;
   align-items: flex-start;
   margin-left: 5%;
   margin-top: 3%;
-  margin-botton: 5%;
+  margin-bottom: 5%;
 }
 
 .grid-size-container {
@@ -77,11 +79,28 @@ code {
   margin-top: 25px;
 }
 
-.gameboard-container {
+.gameboard-container-2by2 {
   display: flex;
-  flex-wrap: wrap;
-  width: 90%;
-  margin-left: 3%;
+  flex-wrap: nowrap;
+  width: calc(126px * 2);
+  height: calc(86px * 2);
+  margin-left: 5%;
+}
+
+.gameboard-container-4by4 {
+  display: flex;
+  flex-wrap: nowrap;
+  width: calc(126px * 4);
+  height: calc(86px * 4);
+  margin-left: 5%;
+}
+
+.gameboard-container-6by6 {
+  display: flex;
+  flex-wrap: nowrap;
+  width: calc(126px * 6);
+  height: calc(86px * 6);
+  margin-left: 5%;
 }
 
 .scorecard-container {
@@ -98,4 +117,17 @@ code {
   padding: 0; /* Remove padding */
   margin: 0; /* Remove margins */
   text-align: left;
+}
+
+.game-type-container {
+  display: flex;
+  width: 25%;
+  color: black;
+  font-weight: normal;
+}
+
+/* reduce size of fonts in dropdown lists */
+.menu-font-style {
+  transform: scale(.8); /* scale down */
+  -webkit-transform-origin-x: 0; /* align text left after scaling */
 }

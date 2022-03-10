@@ -10,6 +10,7 @@ import { Scorecard } from './scorecard';
 import { RestartGameButton } from './restartGameButton';
 import { GridSize } from './gridSize';
 import { GridElement } from './gridElement';
+import { GameType } from './gameType';
 
 class App extends React.Component {
 
@@ -17,7 +18,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            body: //undefined,
+            body: 
                 [
                     [{key: 0, display: "", back: "?????", front: "", status: "hidden"},
                         {key: 1, display: "", back: "?????", front: "", status: "hidden"},
@@ -45,7 +46,8 @@ class App extends React.Component {
             result: 'Click On A Card',
             cardsCleared: 0,
             gameOver: false,
-            gridSize: 4
+            gridSize: 4,
+            gameType: 'planets'
         }
 
         console.log('creating empty grid');
@@ -62,7 +64,7 @@ class App extends React.Component {
         
         let new_state = Object.assign({}, this.state);
         let newBody = new_state.body;
-        populateGrid(newBody, this.state.gridSize);
+        populateGrid(newBody, this.state.gridSize, this.state.gameType);
   
         this.setState({body: newBody});
        
@@ -104,6 +106,7 @@ class App extends React.Component {
 
                  setTimeout(() => { this.checkForMatchingCards(val, newBody, this.state.gridSize); }, 2000);
              }
+             this.setState({cardsFlipped: this.state.cardsFlipped + 1});
 
          } else {
              console.log('2 cards already flipped');                                //if 2 cards are flipped don't allow more
@@ -112,9 +115,9 @@ class App extends React.Component {
     }
 
     checkForMatchingCards = (val, newBody, gridSize) => {
-        //check to see if cards match
+        
         let lastResult = '';
-        var matched = checkForMatch(this.state.card1, val, this.state.gridSize);
+        var matched = checkForMatch(this.state.card1, val, this.state.gameType);
 
         if (!matched) {  //fip cards back over
             console.log('no match');
@@ -158,7 +161,7 @@ class App extends React.Component {
             }
         }
 
-        populateGrid(emptyBody, this.state.gridSize);
+        populateGrid(emptyBody, this.state.gridSize, this.state.gameType);
         //new_state.body = emptyBody;
         this.setState({body: emptyBody});
         this.setState({score: 0});
@@ -186,7 +189,7 @@ class App extends React.Component {
         }
 
         let new_state = Object.assign({}, this.state);
-        populateGrid(emptyBody, newSize);
+        populateGrid(emptyBody, newSize, this.state.gameType);
         new_state.body = emptyBody;
         this.setState({gridSize: newSize});
         this.setState({body: emptyBody});
@@ -196,6 +199,36 @@ class App extends React.Component {
         this.setState({result: 'Click On A Card'});
         this.setState({cardsCleared: 0});
         this.setState({gameOver: false});
+    }
+
+    // Create a callback to toggle the `mobileOpen` state
+    onGameTypeSelected = (event) => {
+        console.log('game type selected: ' + event.target.value);
+
+        let newGameType = event.target.value;
+
+        var emptyBody = new Array();
+        var keyIndex = 0;
+        for(var row = 0; row < this.state.gridSize; row++)
+        {
+            emptyBody[row] = new Array();
+            for(var col = 0; col < this.state.gridSize; col++)
+            {
+                emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
+            }
+        }
+
+        let new_state = Object.assign({}, this.state);
+        populateGrid(emptyBody, this.state.gridSize, newGameType);
+        new_state.body = emptyBody;
+        this.setState({body: emptyBody});
+        this.setState({score: 0});
+        this.setState({cardsFlipped: 0});
+        this.setState({card1: ''});
+        this.setState({result: 'Click On A Card'});
+        this.setState({cardsCleared: 0});
+        this.setState({gameOver: false});
+        this.setState({gameType: newGameType});
     }
 
     render()
@@ -208,10 +241,11 @@ class App extends React.Component {
                   <Score score={this.state.score} />
                   <RestartGameButton onButtonClicked={this.onRestartGameClicked} />
                   <GridSize size={this.state.gridSize} onSizeSelected={this.onSizeSelected} />
+                  <GameType gameType={this.state.gameType} onGameTypeSelected={this.onGameTypeSelected} />
                 </div>
 
                 <Outcome class="outcome" lastResult={this.state.result} />
-                <GameGrid body={this.state.body} onIconClicked={this.onIconClicked}/>
+                <GameGrid body={this.state.body} gridSize={this.state.gridSize} onIconClicked={this.onIconClicked}/>
                 <Scorecard display={true} size={this.state.gridSize}/>
             </div>
         );

@@ -8,18 +8,17 @@ export function GridSize(props) {
         return (
             <div class="grid-size-container">
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Grid Size</InputLabel>
+                    <InputLabel className="menu-font-style" id="select-grid-size-label">Grid Size</InputLabel>
                     <Select
                         labelId="select-grid-size-label"
                         id="select-grid-size"
                         value={props.size}
-                        label="Grid Size"
                         onChange={props.onSizeSelected}
+                        className="menu-font-style"
                     >
-                        <MenuItem value={2}>2 x 2</MenuItem>
-                        <MenuItem value={4}>4 x 4</MenuItem>
-                        <MenuItem value={6}>6 x 6</MenuItem>
-                        <MenuItem value={8}>8 x 8</MenuItem>
+                        <MenuItem className="menu-font-style" value={2}>2 x 2</MenuItem>
+                        <MenuItem className="menu-font-style"  value={4}>4 x 4</MenuItem>
+                        <MenuItem className="menu-font-style"  value={6}>6 x 6</MenuItem>
                     </Select>
                 </FormControl>
             </div>
