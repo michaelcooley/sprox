@@ -165,13 +165,7 @@ class App extends React.Component {
 
         populateGrid(emptyBody, this.state.gridSize, this.state.gameType);
         this.setState({body: emptyBody});
-        this.setState({score: 0});
-        this.setState({cardsFlipped: 0});
-        this.setState({card1: ''});
-        this.setState({instruction: 'Click On A Card'});
-        this.setState({cardsCleared: 0});
-        this.setState({gameOver: false});
-        this.setState({result: ''});
+        this.resetGameState();
     }
 
     // Create a callback to toggle the `mobileOpen` state
@@ -195,6 +189,10 @@ class App extends React.Component {
         new_state.body = emptyBody;
         this.setState({gridSize: newSize});
         this.setState({body: emptyBody});
+        this.resetGameState();
+    }
+
+    resetGameState = () => {
         this.setState({score: 0});
         this.setState({cardsFlipped: 0});
         this.setState({card1: ''});
@@ -225,13 +223,8 @@ class App extends React.Component {
         populateGrid(emptyBody, this.state.gridSize, newGameType);
         new_state.body = emptyBody;
         this.setState({body: emptyBody});
-        this.setState({score: 0});
-        this.setState({cardsFlipped: 0});
-        this.setState({card1: ''});
-        this.setState({instruction: 'Click On A Card'});
-        this.setState({cardsCleared: 0});
-        this.setState({gameOver: false});
         this.setState({gameType: newGameType});
+        this.resetGameState();
     }
 
     render()
