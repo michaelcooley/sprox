@@ -1,4 +1,3 @@
-//export const gridSize = 4;
 const CLEARED_MESSAGE = "**CLEARED**";
 
 export const bands =
@@ -43,31 +42,26 @@ export const books =
     ];
 
 export function populateGrid(body, gridSize, gameType) {
-
-    for (var i = 0; i < (gridSize * gridSize / 2); i++) {
-
-        var randomItem;
-        console.log('populating grid of type: ' + gameType);
-        
-        if (gameType == 'bands') {
+    for (let i = 0; i < (gridSize * gridSize / 2); i++) {
+        let randomItem;
+        if (gameType === 'bands') {
             randomItem = bands[Math.floor(Math.random() * bands.length)];
-        } else if (gameType == 'planets') {
+        } else if (gameType === 'planets') {
             randomItem = planets[Math.floor(Math.random() * planets.length)];
-        } else if (gameType == 'books') {
+        } else if (gameType === 'books') {
             randomItem = books[Math.floor(Math.random() * books.length)];
         }
-        console.log("picking random item: " + randomItem.name + ' value: ' + randomItem.value);
 
-        var randomRow;
-        var randomCol;
-        var element;
+        let randomRow;
+        let randomCol;
+        let element;
 
         //find an available element for planet name
         do {
             randomRow = Math.floor(Math.random() * gridSize);
             randomCol = Math.floor(Math.random() * gridSize);
             element = body[randomRow][randomCol];
-        } while (element.front != "");
+        } while (element.front !== "");
 
         console.log('found element for name: ' + element.key + ' row: ' + randomRow + ' col: ' + randomCol);
         element.front = randomItem.name;
@@ -78,7 +72,7 @@ export function populateGrid(body, gridSize, gameType) {
             randomRow = Math.floor(Math.random() * gridSize);
             randomCol = Math.floor(Math.random() * gridSize);
             element = body[randomRow][randomCol];
-        } while (element.front != "");
+        } while (element.front !== "");
 
         console.log('found element for value:' + element.key);
         element.front = randomItem.value;
@@ -87,28 +81,27 @@ export function populateGrid(body, gridSize, gameType) {
 }
 
 export function flipCardToFront(body, key, gridSize) {
-    for (var row = 0; row < gridSize; row++)
-                 for (var col = 0; col < gridSize; col++) {
-
-                     if (body[row][col].key === key) {
-                         body[row][col].display = body[row][col].front;
-                     }
-                 }
+    for (let row = 0; row < gridSize; row++)
+         for (let col = 0; col < gridSize; col++) {
+             if (body[row][col].key === key) {
+                 body[row][col].display = body[row][col].front;
+             }
+         }
 }
 
 export function flipCardsBackOver(body, card1, val, gridSize) {
-    for (var row = 0; row < gridSize; row++)
-        for (var col = 0; col < gridSize; col++) {
-            if ((body[row][col].key == card1.key) || (body[row][col].key == val.key)) {
+    for (let row = 0; row < gridSize; row++)
+        for (let col = 0; col < gridSize; col++) {
+            if ((body[row][col].key === card1.key) || (body[row][col].key === val.key)) {
                 body[row][col].display = body[row][col].back;
             }
         }
 }
 
 export function markCardsAsCleared(body, card1, val, gridSize) {
-    for (var row = 0; row < gridSize; row++)
-        for (var col = 0; col < gridSize; col++) {
-            if ((body[row][col].key == card1.key)||(body[row][col].key == val.key)) {
+    for (let row = 0; row < gridSize; row++)
+        for (let col = 0; col < gridSize; col++) {
+            if ((body[row][col].key === card1.key)||(body[row][col].key === val.key)) {
                 body[row][col].display = CLEARED_MESSAGE;
             }
         }
@@ -116,24 +109,24 @@ export function markCardsAsCleared(body, card1, val, gridSize) {
 
 export function checkForMatch(card1, val, gameType) {
 
-    if (gameType == 'bands') {
-        for (var j = 0; j < bands.length; j++) {
-            if ((bands[j].name == card1.display || bands[j].name == val.display)&&
-                (bands[j].value == card1.display || bands[j].value == val.display)) {
+    if (gameType === 'bands') {
+        for (let j = 0; j < bands.length; j++) {
+            if ((bands[j].name === card1.display || bands[j].name === val.display)&&
+                (bands[j].value === card1.display || bands[j].value === val.display)) {
                 return true;
             }
         }
-    } else if (gameType == 'planets') {
-        for (var j = 0; j < planets.length; j++) {
-            if ((planets[j].name == card1.display || planets[j].name == val.display)&&
-                (planets[j].value == card1.display || planets[j].value == val.display)) {
+    } else if (gameType === 'planets') {
+        for (let j = 0; j < planets.length; j++) {
+            if ((planets[j].name === card1.display || planets[j].name === val.display)&&
+                (planets[j].value === card1.display || planets[j].value === val.display)) {
                 return true;
             }
         }
-    } else if (gameType == 'books') {
-        for (var j = 0; j < books.length; j++) {
-            if ((books[j].name == card1.display || books[j].name == val.display)&&
-                (books[j].value == card1.display || books[j].value == val.display)) {
+    } else if (gameType === 'books') {
+        for (let j = 0; j < books.length; j++) {
+            if ((books[j].name === card1.display || books[j].name === val.display)&&
+                (books[j].value === card1.display || books[j].value === val.display)) {
                 return true;
             }
         }  
@@ -142,8 +135,8 @@ export function checkForMatch(card1, val, gameType) {
 }
 
 export function cardAlreadyCleared(body, val, gridSize) {
-    for (var row = 0; row < gridSize; row++)
-        for (var col = 0; col < gridSize; col++) {
+    for (let row = 0; row < gridSize; row++)
+        for (let col = 0; col < gridSize; col++) {
             if (body[row][col].key === val.key) {
                 if (body[row][col].display === CLEARED_MESSAGE) return true;
             }

@@ -1,19 +1,17 @@
 
 export function Scorecard(props) {
+    let totalCards = props.size * props.size;
+    let total1 = totalCards;
+    let total2 =  (totalCards + (totalCards / 2));
+    let total3 = (totalCards * 2);
+    let total4 = (totalCards * 3);
+    let total5 = (totalCards * 4);
 
-    var totalCards = props.size * props.size;
-
-    var total1 = totalCards;
-    var total2 =  (totalCards + (totalCards /2));
-    var total3 = (totalCards * 2);
-    var total4 = (totalCards * 3);
-    var total5 = (totalCards * 4);
-
-    var scorecardLine1 = totalCards + ' = PSYCHIC!';
-    var scorecardLine2 = (total1 + 1) + '-' + total2 + ' = Implausible!';
-    var scorecardLine3 = (total2 + 1) + '-'  + total3 + ' = Stellar!';
-    var scorecardLine4 = (total3 + 1) + '-' + total4 + ' = Not Great';
-    var scorecardLine5 = (total4 + 1) + '-'  + total5 + ' = Really Not Great';
+    let scorecardLine1 = totalCards + ' = PSYCHIC!';
+    let scorecardLine2 = (total1 + 1) + '-' + total2 + ' = Implausible!';
+    let scorecardLine3 = (total2 + 1) + '-'  + total3 + ' = Stellar!';
+    let scorecardLine4 = (total3 + 1) + '-' + total4 + ' = Not Great';
+    let scorecardLine5 = (total4 + 1) + '-'  + total5 + ' = Really Not Great';
 
     if (props.display) {
         return <div class="scorecard-container">

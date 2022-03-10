@@ -1,6 +1,4 @@
-
 import Button from '@material-ui/core/Button';
-
 
 export function RestartGameButton(props) {
         return (

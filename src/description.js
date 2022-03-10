@@ -1,4 +1,3 @@
-
 export function Description(props) {
     return <p class="description">
         This is a game of memorization and knowledge. You click any two cards and try to match them. If you get it right, those two cards come off the board. If you get it wrong, then those cards turn back over and you have to try again.

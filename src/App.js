@@ -13,8 +13,10 @@ import { GridElement } from './gridElement';
 import { GameType } from './gameType';
 import { Instructions } from './instructions';
 
-class App extends React.Component {
+const CLICK_ON_A_CARD = 'Click On A Card';
+const CLICK_ON_MATCHING_CARD = 'Click On Matching Card';
 
+class App extends React.Component {
     constructor(props) {
         super(props);
 
@@ -44,7 +46,7 @@ class App extends React.Component {
             score: 0,
             cardsFlipped: 0,
             card1: '',
-            instructions: 'Click On A Card',
+            instructions: CLICK_ON_A_CARD,
             result: '',
             cardsCleared: 0,
             gameOver: false,
@@ -52,13 +54,12 @@ class App extends React.Component {
             gameType: 'bands'
         }
 
-        console.log('creating empty grid');
-        var emptyBody = new Array();
-        var keyIndex = 0;
-        for(var row = 0; row < this.state.gridSize; row++)
+        let emptyBody = new Array();
+        let keyIndex = 0;
+        for(let row = 0; row < this.state.gridSize; row++)
         {
             emptyBody[row] = new Array();
-            for(var col = 0; col < this.state.gridSize; col++)
+            for(let col = 0; col < this.state.gridSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
             }
@@ -67,20 +68,12 @@ class App extends React.Component {
         let new_state = Object.assign({}, this.state);
         let newBody = new_state.body;
         populateGrid(newBody, this.state.gridSize, this.state.gameType);
-  
         this.setState({body: newBody});
-       
-        console.log('updating state in constructor');
     };
 
     onIconClicked = (val) => {
-
-        console.log('icon ' + val.key + ' clicked');
-
          if (this.state.cardsFlipped === 0) {
-
             console.log('first card selected');
-             //find element with the proper key and flip display
              let new_state = Object.assign({}, this.state);
              let newBody = new_state.body;
 
@@ -91,21 +84,16 @@ class App extends React.Component {
                  this.setState({cardsFlipped: this.state.cardsFlipped + 1});
                  this.setState({body: newBody});
                  this.setState({score: this.state.score + 1});
-                 this.setState({instruction: 'Click On The Card That Matches'});
+                 this.setState({instructions: CLICK_ON_MATCHING_CARD});
              }
 
          } else if (this.state.cardsFlipped === 1) {
-
-            console.log('second card selected')
-             //find element with the proper key and flip display
              let new_state = Object.assign({}, this.state);
              let newBody = new_state.body;
 
              if (!cardAlreadyCleared(newBody, val, this.state.gridSize)) {
                  flipCardToFront(newBody, val.key, this.state.gridSize);
-                 console.log('flipping second card to front ' + val.display);
                  this.setState({card2: val});
-
                  setTimeout(() => { this.checkForMatchingCards(val, newBody, this.state.gridSize); }, 2000);
              }
              this.setState({cardsFlipped: this.state.cardsFlipped + 1});
@@ -113,72 +101,62 @@ class App extends React.Component {
          } else {
              console.log('2 cards already flipped');                                //if 2 cards are flipped don't allow more
          }
-
     }
 
     checkForMatchingCards = (val, newBody, gridSize) => {
         
         let lastResult = '';
-        var matched = checkForMatch(this.state.card1, val, this.state.gameType);
+        let matched = checkForMatch(this.state.card1, val, this.state.gameType);
 
         if (!matched) {  //fip cards back over
-            console.log('no match');
             lastResult = "No Match";
-
             flipCardsBackOver(newBody, this.state.card1, val, this.state.gridSize);
             this.setState({cardsFlipped: 0});
+            this.setState({instructions: CLICK_ON_A_CARD});
         } else {
-            console.log('cards match');
             lastResult = "Match!";
             markCardsAsCleared(newBody, this.state.card1, val, this.state.gridSize);
             this.setState({cardsFlipped: 0});
             this.setState({cardsCleared: this.state.cardsCleared + 2});
-            console.log('cards cleared: ' + this.state.cardsCleared);
             if (this.state.cardsCleared === gridSize * gridSize) {
-                //game over
                 lastResult = "GAME OVER!!";
                 this.setState({gameOver: true});
             }
         }
-
         this.setState({result: lastResult});
         this.setState({body: newBody});
         this.setState({score: this.state.score + 1});
     }
 
     onRestartGameClicked = () => {
-
-        console.log('new game');
         let new_state = Object.assign({}, this.state);
 
-        var newSize = this.state.gridSize;
-        var emptyBody = new Array();
-        var keyIndex = 0;
-        for(var row = 0; row < newSize; row++)
+        let newSize = this.state.gridSize;
+        let emptyBody = new Array();
+        let keyIndex = 0;
+        for(let row = 0; row < newSize; row++)
         {
             emptyBody[row] = new Array();
-            for(var col = 0; col < newSize; col++)
+            for(let col = 0; col < newSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
             }
         }
-
         populateGrid(emptyBody, this.state.gridSize, this.state.gameType);
         this.setState({body: emptyBody});
         this.resetGameState();
     }
 
-    // Create a callback to toggle the `mobileOpen` state
     onSizeSelected = (event) => {
         console.log('size selected: ' + event.target.value);
 
-        var newSize = event.target.value;
-        var emptyBody = new Array();
-        var keyIndex = 0;
-        for(var row = 0; row < newSize; row++)
+        let newSize = event.target.value;
+        let emptyBody = new Array();
+        let keyIndex = 0;
+        for (let row = 0; row < newSize; row++)
         {
             emptyBody[row] = new Array();
-            for(var col = 0; col < newSize; col++)
+            for(let col = 0; col < newSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
             }
@@ -196,24 +174,20 @@ class App extends React.Component {
         this.setState({score: 0});
         this.setState({cardsFlipped: 0});
         this.setState({card1: ''});
-        this.setState({instruction: 'Click On A Card'});
+        this.setState({instructions: CLICK_ON_A_CARD});
         this.setState({cardsCleared: 0});
         this.setState({gameOver: false});
         this.setState({result: ''});
     }
 
-    // Create a callback to toggle the `mobileOpen` state
     onGameTypeSelected = (event) => {
-        console.log('game type selected: ' + event.target.value);
-
         let newGameType = event.target.value;
-
-        var emptyBody = new Array();
-        var keyIndex = 0;
-        for(var row = 0; row < this.state.gridSize; row++)
+        let emptyBody = new Array();
+        let keyIndex = 0;
+        for(let row = 0; row < this.state.gridSize; row++)
         {
             emptyBody[row] = new Array();
-            for(var col = 0; col < this.state.gridSize; col++)
+            for(let col = 0; col < this.state.gridSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
             }
@@ -248,10 +222,6 @@ class App extends React.Component {
             </div>
         );
     }
-
-
-
-
 };
 
 export default App;
