@@ -16,6 +16,7 @@ import { BestScores } from './bestScores';
 
 const CLICK_ON_A_CARD = 'Click On A Card';
 const CLICK_ON_MATCHING_CARD = 'Click On Matching Card';
+const CARD_FLIP_DELAY = 1500;
 
 class App extends React.Component {
     constructor(props) {
@@ -98,7 +99,7 @@ class App extends React.Component {
              if (!cardAlreadyCleared(newBody, val, this.state.gridSize)) {
                  flipCardToFront(newBody, val.key, this.state.gridSize);
                  this.setState({card2: val});
-                 setTimeout(() => { this.checkForMatchingCards(val, newBody, this.state.gridSize); }, 2000);
+                 setTimeout(() => { this.checkForMatchingCards(val, newBody, this.state.gridSize); }, CARD_FLIP_DELAY);
                  this.setState({cardsFlipped: this.state.cardsFlipped + 1});
              }
          } else {

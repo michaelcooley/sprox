@@ -14,7 +14,7 @@ code {
 }
 
 .description {
-  width: 70%;
+  width: 80%;
   text-align: left;
   margin-left: 20px;
   font-size: small;
@@ -31,7 +31,7 @@ code {
 .outcome-container {
   display: flex;
   width: 30%;
-  height: 25px;
+  height: 20px;
   justify-content: center;
   justify-items: center;
   color:crimson;
@@ -41,7 +41,7 @@ code {
 .instructions-container {
   display: flex;
   width: 60%;
-  height: 25px;
+  height: 20px;
   justify-content: center;
   justify-items: center;
   color: black;
@@ -66,8 +66,7 @@ code {
    align-content: space-between;
    align-items: flex-start;
    margin-left: 5%;
-   margin-top: 3%;
-   margin-bottom: 5%;
+   margin-top: 10px;
  }
 
 .grid-size-container {
@@ -120,7 +119,7 @@ code {
 .scorecard-container {
   display: flex;
   flex-wrap: wrap;
-  width: 140px;
+  width: 160px;
   margin-left: 10px;
   margin-top: 10px;
   font-size: small;
