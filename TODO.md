@@ -19,16 +19,17 @@
  * **DONE** add Band theme
  * **DONE** refactor code that reinits state on new game and change grid size to use same function  
  * **DONE** preliminary fixes for mobile
-   
- * Fix code warnings
- * convert components that are functions into actual components
- * Add matched and not matched sounds
+ * **DONE** add sounds for matched, not matched, and game over
+ * **DONE** add sound enable checkbox 
+ * **DONE** move score card to the right of the board
+ * **DONE** implement best score tracker
 
- * add a game over noise
+ * fix code warnings
+ * convert components that are functions into actual components
  * make the cards look better with a picture on back instead of ????
  * fix glitch that makes cards with a lot of text on them jump when you click on them (material ui problem?)
- * move score card to the right of the board
- * implement best score tracker
+
+
 
  
  

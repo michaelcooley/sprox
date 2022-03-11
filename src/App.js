@@ -13,6 +13,10 @@ import { GridElement } from './gridElement';
 import { GameType } from './gameType';
 import { Instructions } from './instructions';
 import { BestScores } from './bestScores';
+import { SoundEnable } from './soundEnable';
+import matchSound from './sounds/match.wav';
+import noMatchSound from './sounds/noMatch.mp3';
+import gameOverSound from './sounds/gameOver.mp3';
 
 const CLICK_ON_A_CARD = 'Click On A Card';
 const CLICK_ON_MATCHING_CARD = 'Click On Matching Card';
@@ -56,7 +60,8 @@ class App extends React.Component {
             gameType: 'bands',
             best2by2: 1000,
             best4by4: 1000,
-            best6by6: 1000
+            best6by6: 1000,
+            soundEnabled: false
         }
 
         let emptyBody = new Array();
@@ -78,13 +83,11 @@ class App extends React.Component {
 
     onIconClicked = (val) => {
          if (this.state.cardsFlipped === 0) {
-            console.log('first card selected');
              let new_state = Object.assign({}, this.state);
              let newBody = new_state.body;
 
              if (!cardAlreadyCleared(newBody, val, this.state.gridSize)) {
                  flipCardToFront(newBody, val.key, this.state.gridSize);
-                 console.log('flipping first card to front ' + val.display);
                  this.setState({card1: val});
                  this.setState({cardsFlipped: this.state.cardsFlipped + 1});
                  this.setState({body: newBody});
@@ -117,6 +120,7 @@ class App extends React.Component {
             flipCardsBackOver(newBody, this.state.card1, val, this.state.gridSize);
             this.setState({cardsFlipped: 0});
             this.setState({instructions: CLICK_ON_A_CARD});
+            this.playNoMatchSound();
         } else {
             lastResult = "Match!";
             markCardsAsCleared(newBody, this.state.card1, val, this.state.gridSize);
@@ -133,7 +137,9 @@ class App extends React.Component {
                 } else if ((this.state.gridSize === 6)&&(this.state.score < this.state.best6by6)) {
                     this.setState({best6by6: this.state.score});
                 }
+                this.playGameOverSound();
             }
+            this.playMatchSound();
         }
         this.setState({result: lastResult});
         this.setState({body: newBody});
@@ -213,6 +219,37 @@ class App extends React.Component {
         this.resetGameState();
     }
 
+    onSoundEnableChanged = (event) => {
+        let enabled = event.target.checked;
+        console.log('sound enable change: ' + enabled);
+
+        this.setState({soundEnabled: enabled});
+    }
+
+    playMatchSound = () => {
+        if (this.state.soundEnabled) {
+            let audio = new Audio(matchSound);
+            audio.play();
+            console.log('playing matched sound');
+        }
+    }
+
+    playNoMatchSound = () => {
+        if (this.state.soundEnabled) {
+            let audio = new Audio(noMatchSound);
+            audio.play();
+            console.log('playing matched sound');
+        }
+    }
+
+    playGameOverSound = () => {
+        if (this.state.soundEnabled) {
+            let audio = new Audio(gameOverSound);
+            audio.play();
+            console.log('playing matched sound');
+        }
+    }
+
     render()
     {
         return (
@@ -223,6 +260,7 @@ class App extends React.Component {
                   <RestartGameButton onButtonClicked={this.onRestartGameClicked} />
                   <GridSize size={this.state.gridSize} onSizeSelected={this.onSizeSelected} />
                   <GameType gameType={this.state.gameType} onGameTypeSelected={this.onGameTypeSelected} />
+                  <SoundEnable checked={this.state.soundEnabled} onChange={this.onSoundEnableChanged} />
                 </div>
                 <div className="instructions-results-row-container">
                     <Score score={this.state.score} />

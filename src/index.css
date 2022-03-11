@@ -148,6 +148,17 @@ code {
   font-weight: normal;
 }
 
+.sound-enable-container {
+  display: flex;
+  width: 25%;
+  color: black;
+  font-weight: normal;
+  font-size: small;
+  margin-top: 15px;
+  transform: scale(.8); /* scale down */
+  -webkit-transform-origin-x: 0; /* align text left after scaling */
+}
+
 /* reduce size of fonts in dropdown lists */
 .menu-font-style {
   transform: scale(.8); /* scale down */
