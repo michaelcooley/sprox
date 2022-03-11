@@ -64,11 +64,11 @@ class App extends React.Component {
             soundEnabled: false
         }
 
-        let emptyBody = new Array();
+        let emptyBody = [];
         let keyIndex = 0;
         for(let row = 0; row < this.state.gridSize; row++)
         {
-            emptyBody[row] = new Array();
+            emptyBody[row] = [];
             for(let col = 0; col < this.state.gridSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
@@ -147,14 +147,12 @@ class App extends React.Component {
     }
 
     onRestartGameClicked = () => {
-        let new_state = Object.assign({}, this.state);
-
         let newSize = this.state.gridSize;
-        let emptyBody = new Array();
+        let emptyBody = [];
         let keyIndex = 0;
         for(let row = 0; row < newSize; row++)
         {
-            emptyBody[row] = new Array();
+            emptyBody[row] = [];
             for(let col = 0; col < newSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
@@ -169,11 +167,11 @@ class App extends React.Component {
         console.log('size selected: ' + event.target.value);
 
         let newSize = event.target.value;
-        let emptyBody = new Array();
+        let emptyBody = [];
         let keyIndex = 0;
         for (let row = 0; row < newSize; row++)
         {
-            emptyBody[row] = new Array();
+            emptyBody[row] = [];
             for(let col = 0; col < newSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
@@ -200,11 +198,11 @@ class App extends React.Component {
 
     onGameTypeSelected = (event) => {
         let newGameType = event.target.value;
-        let emptyBody = new Array();
+        let emptyBody = [];
         let keyIndex = 0;
         for(let row = 0; row < this.state.gridSize; row++)
         {
-            emptyBody[row] = new Array();
+            emptyBody[row] = [];
             for(let col = 0; col < this.state.gridSize; col++)
             {
                 emptyBody[row][col] = new GridElement(keyIndex++, "", "????", "", "hidden");
