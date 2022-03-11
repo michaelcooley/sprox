@@ -30,7 +30,7 @@ code {
 
 .outcome-container {
   display: flex;
-  width: 30%;
+  width: 80px;
   height: 20px;
   justify-content: center;
   justify-items: center;
@@ -40,7 +40,7 @@ code {
 
 .instructions-container {
   display: flex;
-  width: 60%;
+  width: 180px;
   height: 20px;
   justify-content: center;
   justify-items: center;
@@ -87,9 +87,9 @@ code {
 .score-container {
   display: flex;
   color: black;
-  font-weight: normal;
-  font-size: small;
-  margin-top: 25px;
+  width: 80px;
+  font-weight: bold;
+  font-size: medium;
 }
 
 .gameboard-container-2by2 {

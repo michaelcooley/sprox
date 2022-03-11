@@ -220,12 +220,12 @@ class App extends React.Component {
                 <TitleBar version="0.1"/>
                 <Description/>
                 <div class="options-row-container">
-                  <Score score={this.state.score} />
                   <RestartGameButton onButtonClicked={this.onRestartGameClicked} />
                   <GridSize size={this.state.gridSize} onSizeSelected={this.onSizeSelected} />
                   <GameType gameType={this.state.gameType} onGameTypeSelected={this.onGameTypeSelected} />
                 </div>
                 <div className="instructions-results-row-container">
+                    <Score score={this.state.score} />
                     <Instructions class="instruction-container" lastInstruction={this.state.instructions} />
                     <Outcome class="outcome-container" lastResult={this.state.result} />
                 </div>
