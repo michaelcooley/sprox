@@ -30,7 +30,7 @@ code {
 
 .outcome-container {
   display: flex;
-  width: 80px;
+  width: 120px;
   height: 20px;
   justify-content: center;
   justify-items: center;
@@ -168,7 +168,7 @@ code {
 .instructions-results-row-container {
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 50%;
   justify-content: space-between;
   justify-items: center;
   align-content: center;
