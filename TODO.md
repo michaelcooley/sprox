@@ -27,7 +27,8 @@
  * add a game over noise
  * make the cards look better with a picture on back instead of ????
  * fix glitch that makes cards with a lot of text on them jump when you click on them (material ui problem?)
-
+ * move score card to the right of the board
+ * implement best score tracker
 
  
  

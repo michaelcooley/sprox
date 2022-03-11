@@ -63,7 +63,6 @@ export function populateGrid(body, gridSize, gameType) {
             element = body[randomRow][randomCol];
         } while (element.front !== "");
 
-        console.log('found element for name: ' + element.key + ' row: ' + randomRow + ' col: ' + randomCol);
         element.front = randomItem.name;
         element.display = element.back;
 
@@ -74,7 +73,6 @@ export function populateGrid(body, gridSize, gameType) {
             element = body[randomRow][randomCol];
         } while (element.front !== "");
 
-        console.log('found element for value:' + element.key);
         element.front = randomItem.value;
         element.display = element.back;
     }

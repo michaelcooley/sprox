@@ -12,6 +12,7 @@ import { GridSize } from './gridSize';
 import { GridElement } from './gridElement';
 import { GameType } from './gameType';
 import { Instructions } from './instructions';
+import { BestScores } from './bestScores';
 
 const CLICK_ON_A_CARD = 'Click On A Card';
 const CLICK_ON_MATCHING_CARD = 'Click On Matching Card';
@@ -51,7 +52,10 @@ class App extends React.Component {
             cardsCleared: 0,
             gameOver: false,
             gridSize: 4,
-            gameType: 'bands'
+            gameType: 'bands',
+            best2by2: 1000,
+            best4by4: 1000,
+            best6by6: 1000
         }
 
         let emptyBody = new Array();
@@ -95,9 +99,8 @@ class App extends React.Component {
                  flipCardToFront(newBody, val.key, this.state.gridSize);
                  this.setState({card2: val});
                  setTimeout(() => { this.checkForMatchingCards(val, newBody, this.state.gridSize); }, 2000);
+                 this.setState({cardsFlipped: this.state.cardsFlipped + 1});
              }
-             this.setState({cardsFlipped: this.state.cardsFlipped + 1});
-
          } else {
              console.log('2 cards already flipped');                                //if 2 cards are flipped don't allow more
          }
@@ -121,6 +124,14 @@ class App extends React.Component {
             if (this.state.cardsCleared === gridSize * gridSize) {
                 lastResult = "GAME OVER!!";
                 this.setState({gameOver: true});
+
+                if ((this.state.gridSize === 2)&&(this.state.score < this.state.best2by2)) {
+                    this.setState({best2by2: this.state.score});
+                } else if ((this.state.gridSize === 4)&&(this.state.score < this.state.best4by4)) {
+                    this.setState({best4by4: this.state.score});
+                } else if ((this.state.gridSize === 6)&&(this.state.score < this.state.best6by6)) {
+                    this.setState({best6by6: this.state.score});
+                }
             }
         }
         this.setState({result: lastResult});
@@ -217,8 +228,13 @@ class App extends React.Component {
                     <Instructions class="instruction-container" lastInstruction={this.state.instructions} />
                     <Outcome class="outcome-container" lastResult={this.state.result} />
                 </div>
-                <GameGrid body={this.state.body} gridSize={this.state.gridSize} onIconClicked={this.onIconClicked}/>
-                <Scorecard display={true} size={this.state.gridSize}/>
+                <div class="gameboard-and-scores-container">
+                    <GameGrid body={this.state.body} gridSize={this.state.gridSize} onIconClicked={this.onIconClicked}/>
+                    <div class="scores-and-best-scores-container">
+                        <BestScores best2by2={this.state.best2by2} best4by4={this.state.best4by4} best6by6={this.state.best6by6} />
+                        <Scorecard display={true} size={this.state.gridSize}/>
+                    </div>
+                </div>
             </div>
         );
     }

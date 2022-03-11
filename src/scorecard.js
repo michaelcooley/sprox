@@ -16,8 +16,7 @@ export function Scorecard(props) {
     if (props.display) {
         return <div class="scorecard-container">
             <ul class="ul-no-bullets">
-                <li><b>Scorecard:</b></li>
-                <li>&nbsp;</li>
+                <li><b>Scorecard</b></li>
                 <li>{ scorecardLine1 }</li>
                 <li>{ scorecardLine2 }</li>
                 <li>{ scorecardLine3 }</li>
